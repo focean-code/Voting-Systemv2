@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useElection } from '../../contexts/ElectionContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { useElection } from '@/src/contexts/ElectionContext';
+import { useAuth } from '@/src/contexts/AuthContext';
 import { VoterManagement } from './VoterManagement';
 import { CandidateManagement } from './CandidateManagement';
 import { AnalyticsDashboard } from './AnalyticsDashboard';
 import { SettingsPanel } from './SettingsPanel';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
-import { AppState, Candidate, ElectionPhase, ElectionSettings, Voter } from '../../types';
+import { AppState, Candidate, ElectionPhase, ElectionSettings, Voter } from '@/types';
 import { LayoutDashboard, Users, Vote, Settings } from 'lucide-react';
 
 interface AdminDashboardProps {
@@ -41,6 +41,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = (props) => {
   const handleLogout = props.onLogout || signOut;
   const updateSettings = props.onUpdateSettings || ctxUpdateSettings;
   
+  const handleUpdateSettings = async (settings: ElectionSettings) => {
+    if (updateSettings) {
+      await Promise.resolve(updateSettings(settings));
+    }
+  };
+
   // Derived handlers for components
   const handleRefresh = () => {
     if (props.state) {
@@ -154,7 +160,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = (props) => {
         )}
 
         {activeTab === 'settings' && (
-          <SettingsPanel settings={state.settings} onUpdate={updateSettings} />
+          <SettingsPanel settings={state.settings} onUpdate={handleUpdateSettings} />
         )}
       </main>
     </div>

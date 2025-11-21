@@ -1,6 +1,6 @@
 
-import { supabase } from '../lib/supabase';
-import { AppState, Candidate, ElectionPhase, ElectionSettings, Vote, Voter, VoterStatus } from '../../types';
+import { supabase } from '@/src/lib/supabase';
+import { AppState, Candidate, ElectionPhase, ElectionSettings, Vote, Voter, VoterStatus } from '@/types';
 
 // --- Fetch Initial State ---
 // Note: fetching 'voters' here will intentionally fail for public users due to RLS.
