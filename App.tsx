@@ -110,7 +110,7 @@ function App() {
   const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // Using import.meta.env for Vite compatibility (fallback handled in constants.ts)
-    const envPassword = ADMIN_PASSWORD;
+    const envPassword = import.meta.env.VITE_ADMIN_PASSWORD || ADMIN_PASSWORD;
     
     if (adminPassInput === envPassword) {
       navigateTo('ADMIN_DASH');
